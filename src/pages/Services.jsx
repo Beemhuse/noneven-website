@@ -4,8 +4,9 @@ import InspirationBanner from "../component/InspirationBanner";
 
 export default function Services() {
   return (
-    <section className="xl:px-[150px] p-3 mt-[50px] grid gap-[50px]">
-      <div className="xl:w-2/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
+    <section >
+    <section className="xl:px-[100px]  mt-[50px] grid gap-[50px]">
+      <div className="xl:w-3/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
         <h2 className="xl:text-3xl text-2xl text-center font-[600]">
           Comprehensive Solutions for Your Agricultural Needs{" "}
         </h2>
@@ -29,7 +30,7 @@ export default function Services() {
         </button>
       </div>
 
-      <div className="xl:w-2/4 w-full m-auto  gap-4 flex mt-10 flex-col items-center justify-center">
+      <div className="xl:w-3/4 w-full m-auto  gap-4 flex mt-10 flex-col items-center justify-center">
         <h2 className="xl:text-3xl text-2xl text-center font-[600]">
           Unlock Clarity & Confidence in Your Real Estate Journey
         </h2>
@@ -50,6 +51,7 @@ export default function Services() {
           <IoMdCall /> Book a consultation call{" "}
         </button>
       </div>
+    </section>
       <InspirationBanner />
     </section>
   );

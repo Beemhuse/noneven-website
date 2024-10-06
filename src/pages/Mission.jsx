@@ -38,7 +38,7 @@ export default function Mission() {
           agricultural endeavors.
         </p>
       </div>
-      <div className="flex flex-col mt-10 w-full items-center gap-8">
+      {/* <div className="flex flex-col mt-10 w-full items-center gap-8">
         <div className="grid  grid-cols-3 items-center gap-3">
           <img src="/prod1.svg" alt="image of writing"  />
           <img src="/prod2.svg" alt="image of  hand"  />
@@ -50,7 +50,7 @@ export default function Mission() {
         <button className="flex  border-2 font-bold text-white bg-[#2D89BF] px-3 py-2  items-center gap-3">
           <FaShoppingCart /> Buy Products{" "}
         </button>
-      </div>
+      </div> */}
       </div>
 
       <InspirationBanner />
