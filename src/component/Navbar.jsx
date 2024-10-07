@@ -9,7 +9,7 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "Mission", path: "/mission" },
     { name: "Services", path: "/services" },
-    { name: "Contact us", path: "/contact" },
+    // { name: "Contact us", path: "/contact" },
   ];
 
   const toggleMenu = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center py-4 px-6 bg-white ">
+    <nav className="flex justify-between items-center py-4 px-20 bg-white ">
       <img src="/Logo.svg" alt="noneven logo" />
       {/* Desktop Menu */}
       <ul className="hidden md:flex w-fit m-auto space-x-6">
@@ -39,9 +39,9 @@ const Navbar = () => {
       </ul>
 
       {/* Contact Button */}
-      {/* <button className="hidden md:block px-4 py-2 border border-[#2D89BF] text-blue-600 rounded hover:bg-[#2D89BF] hover:text-white">
+      <button className="hidden md:block px-4 py-2 border border-[#2D89BF] text-blue-600 rounded hover:bg-[#2D89BF] hover:text-white"   href="mailto:noblenegroventures@gmail.com">
         Contact Me
-      </button> */}
+      </button>
 
       {/* Mobile Menu Icon */}
       <div className="md:hidden" onClick={toggleMenu}>

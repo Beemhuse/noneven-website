@@ -164,10 +164,10 @@ export default function MainPage() {
           <img src="/root.svg" alt="image of root" />
           <img src="/root.svg" alt="image of root" />
         </div>
-        <button className="flex items-center bg-[#2D89BF] px-3 py-2 text-white gap-3">
+        {/* <button className="flex items-center bg-[#2D89BF] px-3 py-2 text-white gap-3">
           {" "}
           Learn More{" "}
-        </button>
+        </button> */}
       </div>
       <div className="xl:w-3/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
         <h2 className="xl:text-3xl text-2xl xl:text-justify text-center font-[600]">
@@ -179,13 +179,13 @@ export default function MainPage() {
           buying, selling, or investing.
         </p>
       </div>
-      <div className="flex flex-col items-center gap-8">
-        <div className="grid grid-cols-3 items-center gap-3">
-          <img src="/writing.svg" alt="image of writing" className="w-" />
-          <img src="/hand.svg" alt="image of  hand" />
-          <img src="/meeting.svg" alt="image of meeting" />
+      <div className="flex flex-col items-center gap-8"  >
+        <div className="flex flex-row items-center  gap-3" >
+          <img src="/writing.svg" alt="image of writing" style={{width: "30vw"}} />
+          <img src="/hand.svg" alt="image of  hand" style={{width: "30vw"}}  />
+          <img src="/meeting.svg" alt="image of meeting" style={{width: "30vw"}}  />
         </div>
-        <button className="flex  border-2 font-bold text-white bg-[#2D89BF] px-3 py-2  items-center gap-3">
+        <button className="flex  border-2 font-bold text-white bg-[#2D89BF] px-3 py-2  items-center gap-3" href="mailto:noblenegroventures@gmail.com">
           <IoMdCall /> Book a consultation call{" "}
         </button>
       </div>
@@ -207,7 +207,7 @@ export default function MainPage() {
             From customs clearance to logistics, we handle all aspects of global
             trade, allowing you to focus on growing your business.
           </p>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded" href="mailto:noblenegroventures@gmail.com">
             Contact Us Today
           </button>
         </div>
@@ -308,7 +308,7 @@ export default function MainPage() {
 
       {/* Main page content */}
       <div className="flex flex-col items-center gap-8">
-        <div className="grid grid-cols-3 items-center gap-6">
+        <div className="grid grid-cols-3 items-center gap-6 mb-9">
           {products.map((product) => (
             <div key={product.id} className="text-center">
               <img

@@ -11,7 +11,7 @@ const InspirationBanner = () => {
         <h1 className="text-2xl font-bold mb-4">Let&apos;s Cultivate Success Together</h1>
         <p className="mb-4">
         We&apos;re here to answer your questions, discuss your needs, and explore how we can collaborate to achieve your agricultural goals.        </p>
-        <button className="bg-[#2D89BF]  hover:bg-[#2D89BF]/10  text-white font-semibold py-2 px-4 rounded">
+        <button className="bg-[#2D89BF]  hover:bg-[#2D89BF]/10  text-white font-semibold py-2 px-4 rounded" href="mailto:noblenegroventures@gmail.com">
           Send a Message
         </button>
       </div>

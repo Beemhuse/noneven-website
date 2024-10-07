@@ -16,7 +16,7 @@ const Hero = () => {
           <button className="flex items-center bg-[#2D89BF] px-3 py-2 text-white gap-3">
             <FaShoppingCart /> Buy Products{" "}
           </button>
-          <button className="flex  border-2 font-bold border-[#2D89BF] px-3 py-2  items-center gap-3">
+          <button className="flex  border-2 font-bold border-[#2D89BF] px-3 py-2  items-center gap-3" href="mailto:noblenegroventures@gmail.com">
             <IoMdCall /> Book a consultation call{" "}
           </button>
         </div>
