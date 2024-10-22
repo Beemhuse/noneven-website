@@ -62,7 +62,7 @@ export default function Mission() {
           to_email: "noblenegroventures@gmail.com", // Admin's email
           subject: "New Purchase Order",
         },
-        "YOUR_USER_ID" // Replace with your EmailJS public key
+        "uQCYukDaD13qnaIyx" // Replace with your EmailJS public key
       )
       .then(
         (result) => {
@@ -83,7 +83,7 @@ export default function Mission() {
           to_email: buyerEmail, // Buyer's email
           subject: "Your Purchase Receipt",
         },
-        "YOUR_USER_ID" // Replace with your EmailJS public key
+        "uQCYukDaD13qnaIyx" // Replace with your EmailJS public key
       )
       .then(
         (result) => {

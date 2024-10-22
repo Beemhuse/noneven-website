@@ -40,6 +40,61 @@ export default function MainPage() {
   const handleFlutterwavePayment = useFlutterwave(flutterwaveConfig);
 
   // Function to send emails using EmailJS
+  // const sendEmails = (buyerEmail, paymentReference) => {
+  //   const emailData = {
+  //     name: checkoutInfo.name,
+  //     email: checkoutInfo.email,
+  //     phone: checkoutInfo.phone,
+  //     address: checkoutInfo.address,
+  //     product: selectedProduct,
+  //     price: selectedPrice,
+  //     payment_reference: paymentReference, // Include the payment reference in the email data
+  //   };
+
+  //   // Sending email to admin
+  //   emailjs
+  //     .send(
+  //       "service_1oupkxg", // Replace with your EmailJS service ID
+  //       "template_gb4qaag", // For admin email
+  //       {
+  //         ...emailData,
+  //         to_email: "noblenegroventures@gmail.com", // Admin's email
+   
+  //         subject: "New Purchase Order",
+  //       },
+  //       "uQCYukDaD13qnaIyx" // Replace with your EmailJS public key
+  //     )
+  //     .then(
+  //       (result) => {
+  //         console.log("Admin email sent:", result.text);
+  //       },
+  //       (error) => {
+  //         console.log("Error sending email to admin:", error.text);
+  //       }
+  //     );
+
+  //   // Sending email to buyer (receipt)
+  //   emailjs
+  //     .send(
+  //       "service_1oupkxg", // Replace with your EmailJS service ID
+  //       "template_9q5dkrk", // For buyer email receipt
+  //       {
+  //         ...emailData,
+  //         to_email: buyerEmail, // Buyer's email
+  //         subject: "Your Purchase Receipt",
+  //       },
+  //       "uQCYukDaD13qnaIyx" // Replace with your EmailJS public key
+  //     )
+  //     .then(
+  //       (result) => {
+  //         console.log("Buyer receipt email sent:", result.text);
+  //       },
+  //       (error) => {
+  //         console.log("Error sending receipt to buyer:", error.text);
+  //       }
+  //     );
+  // };
+
   const sendEmails = (buyerEmail, paymentReference) => {
     const emailData = {
       name: checkoutInfo.name,
@@ -48,51 +103,50 @@ export default function MainPage() {
       address: checkoutInfo.address,
       product: selectedProduct,
       price: selectedPrice,
-      payment_reference: paymentReference, // Include the payment reference in the email data
+      payment_reference: paymentReference,
     };
-
-    // Sending email to admin
-    emailjs
-      .send(
-        "service_1oupkxg", // Replace with your EmailJS service ID
-        "template_gb4qaag", // For admin email
-        {
-          ...emailData,
-          to_email: "noblenegroventures@gmail.com", // Admin's email
-          subject: "New Purchase Order",
-        },
-        "YOUR_USER_ID" // Replace with your EmailJS public key
-      )
-      .then(
-        (result) => {
-          console.log("Admin email sent:", result.text);
-        },
-        (error) => {
-          console.log("Error sending email to admin:", error.text);
-        }
-      );
-
-    // Sending email to buyer (receipt)
-    emailjs
-      .send(
-        "service_1oupkxg", // Replace with your EmailJS service ID
-        "template_9q5dkrk", // For buyer email receipt
-        {
-          ...emailData,
-          to_email: buyerEmail, // Buyer's email
-          subject: "Your Purchase Receipt",
-        },
-        "YOUR_USER_ID" // Replace with your EmailJS public key
-      )
-      .then(
-        (result) => {
-          console.log("Buyer receipt email sent:", result.text);
-        },
-        (error) => {
-          console.log("Error sending receipt to buyer:", error.text);
-        }
-      );
+  
+    // Admin email
+    emailjs.send(
+      "service_1oupkxg", 
+      "template_gb4qaag", 
+      {
+        ...emailData,
+        to_email: "noblenegroventures@gmail.com",
+        subject: "New Purchase Order",
+      },
+      "uQCYukDaD13qnaIyx"
+    )
+    .then(
+      (result) => {
+        console.log("Admin email sent:", result.text);
+      },
+      (error) => {
+        console.log("Error sending email to admin:", error.text);
+      }
+    );
+  
+    // Buyer receipt email
+    emailjs.send(
+      "service_1oupkxg",
+      "template_9q5dkrk",
+      {
+        ...emailData,
+        to_email: buyerEmail,
+        subject: "Your Purchase Receipt",
+      },
+      "uQCYukDaD13qnaIyx"
+    )
+    .then(
+      (result) => {
+        console.log("Buyer receipt email sent:", result.text);
+      },
+      (error) => {
+        console.log("Error sending receipt to buyer:", error.text);
+      }
+    );
   };
+  
 
   // Function to initialize Flutterwave payment
   const handlePayment = () => {
@@ -110,6 +164,8 @@ export default function MainPage() {
 
             // Extract Flutterwave payment reference (tx_ref) from the response
             const paymentReference = response.tx_ref;
+
+            
 
             // Send email to admin and buyer
             sendEmails(checkoutInfo.email, paymentReference);
