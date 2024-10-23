@@ -59,7 +59,7 @@ export default function MainPage() {
   //       {
   //         ...emailData,
   //         to_email: "noblenegroventures@gmail.com", // Admin's email
-   
+
   //         subject: "New Purchase Order",
   //       },
   //       "uQCYukDaD13qnaIyx" // Replace with your EmailJS public key
@@ -96,6 +96,8 @@ export default function MainPage() {
   // };
 
   const sendEmails = (buyerEmail, paymentReference) => {
+    console.log({ buyerEmail });
+
     const emailData = {
       name: checkoutInfo.name,
       email: checkoutInfo.email,
@@ -105,51 +107,53 @@ export default function MainPage() {
       price: selectedPrice,
       payment_reference: paymentReference,
     };
-  
+    console.log(emailData?.email);
     // Admin email
-    emailjs.send(
-      "service_1oupkxg", 
-      "template_gb4qaag", 
-      {
-        ...emailData,
-        to_email: "noblenegroventures@gmail.com",
-        subject: "New Purchase Order",
-      },
-      "uQCYukDaD13qnaIyx"
-    )
-    .then(
-      (result) => {
-        console.log("Admin email sent:", result.text);
-      },
-      (error) => {
-        console.log("Error sending email to admin:", error.text);
-      }
-    );
-  
+    emailjs
+      .send(
+        "service_1oupkxg",
+        "template_gb4qaag",
+        {
+          ...emailData,
+          to_email: "noblenegroventures@gmail.com",
+          subject: "New Purchase Order",
+        },
+        "uQCYukDaD13qnaIyx"
+      )
+      .then(
+        (result) => {
+          console.log("Admin email sent:", { result }, { emailData });
+        },
+        (error) => {
+          console.log("Error sending email to admin:", error.text);
+        }
+      );
+
     // Buyer receipt email
-    emailjs.send(
-      "service_1oupkxg",
-      "template_9q5dkrk",
-      {
-        ...emailData,
-        to_email: buyerEmail,
-        subject: "Your Purchase Receipt",
-      },
-      "uQCYukDaD13qnaIyx"
-    )
-    .then(
-      (result) => {
-        console.log("Buyer receipt email sent:", result.text);
-      },
-      (error) => {
-        console.log("Error sending receipt to buyer:", error.text);
-      }
-    );
+    emailjs
+      .send(
+        "service_1oupkxg",
+        "template_9q5dkrk",
+        {
+          ...emailData,
+          to_email: buyerEmail,
+          subject: "Your Purchase Receipt",
+        },
+        "uQCYukDaD13qnaIyx"
+      )
+      .then(
+        (result) => {
+          console.log("Buyer receipt email sent:", result.text);
+        },
+        (error) => {
+          console.log("Error sending receipt to buyer:", error.text);
+        }
+      );
   };
-  
 
   // Function to initialize Flutterwave payment
   const handlePayment = () => {
+    // sendEmails("checkoutInfo.email", "paymentReference");
     if (
       checkoutInfo.name &&
       checkoutInfo.email &&
@@ -158,14 +162,12 @@ export default function MainPage() {
     ) {
       handleFlutterwavePayment({
         callback: (response) => {
-          console.log(response);
-          if (response.status === "successful") {
+          // console.log({response});
+          if (response.status === "completed") {
             alert(`Payment successful for ${selectedProduct}`);
 
             // Extract Flutterwave payment reference (tx_ref) from the response
             const paymentReference = response.tx_ref;
-
-            
 
             // Send email to admin and buyer
             sendEmails(checkoutInfo.email, paymentReference);
@@ -202,10 +204,15 @@ export default function MainPage() {
 
   return (
     <section className="xl:px-[100px] p-.3 mt-[50px] grid gap-[50px] relative">
-      <img src="/root.svg" alt="image of root" className="w-full" />
+      <img
+        src="https://media.istockphoto.com/id/1178618553/photo/guine-bissau.jpg?s=612x612&w=0&k=20&c=QK_mPsFzjsIaVPR5YNYIovMtJKEnQgzgFyEJTrwdnAQ="
+        alt="image of root"
+        className="w-full"
+        style={{ height: "70vh" }}
+      />
       <div className="xl:w-3/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
         <h2 className="xl:text-3xl text-2xl xl:text-justify text-center font-[600]">
-          Building a Thriving Agricultural Ecosystem
+        Building and Facilitating a Thriving Agricultural-based Econom
         </h2>
         <p className="xl:text-2xl text-lg text-center">
           We are dedicated to supporting Nigerian farmers and businesses
@@ -214,16 +221,43 @@ export default function MainPage() {
           contribute to food security in the nation.
         </p>
       </div>
+      {/* <div className="flex flex-col items-center gap-8">
+        <div className="grid grid-cols-3 items-center gap-3"> */}
       <div className="flex flex-col items-center gap-8">
-        <div className="grid grid-cols-3 items-center gap-3">
-          <img src="/root.svg" alt="image of root"  />
-          <img src="/root.svg" alt="image of root" />
-          <img src="/root.svg" alt="image of root" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTndD-fabEU8j3yrX4DUto6gxufznPtJdELpw&s"
+            alt="image of root"
+            style={{ width: "100vw", height: "40vh" }}
+          />
+          <img
+            src="https://live.staticflickr.com/4373/36416997680_c438c968e5_z.jpg"
+            alt="image of root"
+            style={{ width: "100vw", height: "40vh" }}
+          />
+          <img
+            src="https://media.istockphoto.com/id/1178618553/photo/guine-bissau.jpg?s=612x612&w=0&k=20&c=QK_mPsFzjsIaVPR5YNYIovMtJKEnQgzgFyEJTrwdnAQ="
+            alt="image of root"
+            style={{ width: "100vw", height: "40vh" }}
+          />
+
+          <img
+            src="https://i.ytimg.com/vi/SB2eHdaKrAY/maxresdefault.jpg"
+            alt="image of root"
+            style={{ width: "100vw", height: "40vh" }}
+          />
+
+          <img
+            src="https://i0.wp.com/www.myagricworld.com/wp-content/uploads/2021/06/mena.png?fit=1200%2C1025&ssl=1"
+            alt="image of root"
+            style={{ width: "100vw", height: "40vh" }}
+          />
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4hxzb0F-jUzbjliKz82nXe6OYsQm8x3WTCtvJhCWks-BWIUJcT2elG8t0TS7ksxtibE4&usqp=CAU"
+            alt="image of root"
+            style={{ width: "100vw", height: "40vh" }}
+          />
         </div>
-        {/* <button className="flex items-center bg-[#2D89BF] px-3 py-2 text-white gap-3">
-          {" "}
-          Learn More{" "}
-        </button> */}
       </div>
       <div className="xl:w-3/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
         <h2 className="xl:text-3xl text-2xl xl:text-justify text-center font-[600]">
@@ -235,13 +269,24 @@ export default function MainPage() {
           buying, selling, or investing.
         </p>
       </div>
-      <div className="flex flex-col items-center gap-8"  >
-        <div className="flex flex-row items-center  gap-3" >
-          <img src="/writing.svg" alt="image of writing" style={{width: "30vw"}} />
-          <img src="/hand.svg" alt="image of  hand" style={{width: "30vw"}}  />
-          <img src="/meeting.svg" alt="image of meeting" style={{width: "30vw"}}  />
+      <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-row items-center  gap-3">
+          <img
+            src="/writing.svg"
+            alt="image of writing"
+            style={{ width: "30vw" }}
+          />
+          <img src="/hand.svg" alt="image of  hand" style={{ width: "30vw" }} />
+          <img
+            src="/meeting.svg"
+            alt="image of meeting"
+            style={{ width: "30vw" }}
+          />
         </div>
-        <button className="flex  border-2 font-bold text-white bg-[#2D89BF] px-3 py-2  items-center gap-3" href="mailto:noblenegroventures@gmail.com">
+        <button
+          className="flex  border-2 font-bold text-white bg-[#2D89BF] px-3 py-2  items-center gap-3"
+          href="mailto:noblenegroventures@gmail.com"
+        >
           <IoMdCall /> Book a consultation call{" "}
         </button>
       </div>
@@ -263,7 +308,10 @@ export default function MainPage() {
             From customs clearance to logistics, we handle all aspects of global
             trade, allowing you to focus on growing your business.
           </p>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded" href="mailto:noblenegroventures@gmail.com">
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+            href="mailto:noblenegroventures@gmail.com"
+          >
             Contact Us Today
           </button>
         </div>
@@ -363,8 +411,10 @@ export default function MainPage() {
       )}
 
       {/* Main page content */}
+      {/* <div className="flex flex-col items-center gap-8">
+        <div className="grid grid-cols-3 items-center gap-6 mb-9"> */}
       <div className="flex flex-col items-center gap-8">
-        <div className="grid grid-cols-3 items-center gap-6 mb-9">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
           {products.map((product) => (
             <div key={product.id} className="text-center">
               <img

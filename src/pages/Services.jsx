@@ -111,7 +111,7 @@ export default function Services() {
       handleFlutterwavePayment({
         callback: (response) => {
           console.log(response);
-          if (response.status === "successful") {
+          if (response.status === "completed") {
             alert(`Payment successful for ${selectedProduct}`);
 
             // Extract Flutterwave payment reference (tx_ref) from the response
@@ -163,7 +163,7 @@ export default function Services() {
           </p>
         </div>
         <div className="flex flex-col items-center gap-8">
-          <div className="grid grid-cols-3 items-center gap-6 mb-9">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
             {products.map((product) => (
               <div key={product.id} className="text-center">
                 <img

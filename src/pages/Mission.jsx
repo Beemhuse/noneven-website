@@ -106,7 +106,7 @@ export default function Mission() {
       handleFlutterwavePayment({
         callback: (response) => {
           console.log(response);
-          if (response.status === "successful") {
+          if (response.status === "completed") {
             alert(`Payment successful for ${selectedProduct}`);
 
             // Extract Flutterwave payment reference (tx_ref) from the response
@@ -146,12 +146,17 @@ export default function Mission() {
   };
   return (
     <section className=" mt-[50px] grid gap-[50px]">
-      <div className="xl:px-[100px] p-3">
+      <div className="xl:px-[100px] p-.3">
         <h2 className="xl:text-3xl text-2xl xl:w-2/4 w-full text-center m-auto">
           Cultivating Change: Building a Sustainable and Prosperous Future for
           Nigerian Agriculture
         </h2>
-        <img src="/root.svg" alt="image of root" className="w-full my-10" />
+        <img
+          src="https://media.istockphoto.com/id/1178618553/photo/guine-bissau.jpg?s=612x612&w=0&k=20&c=QK_mPsFzjsIaVPR5YNYIovMtJKEnQgzgFyEJTrwdnAQ="
+          alt="image of root"
+          className="w-full"
+          style={{ height: "70vh" }}
+        />
         <p
           className="xl:text-2xl my-10 text-lg text-center"
           style={{ fontWeight: "400 !important" }}
@@ -167,7 +172,6 @@ export default function Mission() {
           collaboration, and a deep respect for the land guide our every step on
           this journey.
         </p>
-
         {/* Form for checkout info */}
         {showForm && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -255,9 +259,8 @@ export default function Mission() {
             </div>
           </div>
         )}
-
-        <div className="flex flex-col items-center gap-8">
-          <div className="grid grid-cols-3 items-center gap-6 mb-9">
+           <div className="flex flex-col items-center gap-8">
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
             {products.map((product) => (
               <div key={product.id} className="text-center">
                 <img
