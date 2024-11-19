@@ -5,6 +5,12 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import emailjs from "emailjs-com"; // Importing EmailJS
 import products from "../../assets/product";
+import crayfishImage from "../../assets/ProductImage/crayfishImage.jpeg"
+import garriImage from "../../assets/ProductImage/garriImage.jpeg"
+import store1 from "../../assets/ProductImage/store1.jpeg"
+import store2 from "../../assets/ProductImage/store2.jpeg"
+import store3 from "../../assets/ProductImage/store3.jpeg"
+
 
 export default function MainPage() {
   const [checkoutInfo, setCheckoutInfo] = useState({
@@ -32,7 +38,7 @@ export default function MainPage() {
     customizations: {
       title: "Product Purchase",
       description: `Payment for ${selectedProduct}`,
-      logo: "https://example.com/logo.png", // Add your logo URL here
+      logo: "/Logo.svg", // Add your logo URL here
     },
   };
 
@@ -204,15 +210,21 @@ export default function MainPage() {
 
   return (
     <section className="xl:px-[100px] p-.3 mt-[50px] grid gap-[50px] relative">
-      <img
+      {/* <img
         src="https://media.istockphoto.com/id/1178618553/photo/guine-bissau.jpg?s=612x612&w=0&k=20&c=QK_mPsFzjsIaVPR5YNYIovMtJKEnQgzgFyEJTrwdnAQ="
         alt="image of root"
         className="w-full"
         style={{ height: "70vh" }}
+      /> */}
+      <img
+        src={store2}
+        alt="image of root"
+        className="w-full"
+        style={{ height: "70vh", }}
       />
       <div className="xl:w-3/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
         <h2 className="xl:text-3xl text-2xl xl:text-justify text-center font-[600]">
-        Building and Facilitating a Thriving Agricultural-based Econom
+        Building and Facilitating a Thriving Agricultural-based Supplies for our Global Needs
         </h2>
         <p className="xl:text-2xl text-lg text-center">
           We are dedicated to supporting Nigerian farmers and businesses
@@ -226,12 +238,32 @@ export default function MainPage() {
       <div className="flex flex-col items-center gap-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTndD-fabEU8j3yrX4DUto6gxufznPtJdELpw&s"
+            src={store1}
             alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
           <img
-            src="https://live.staticflickr.com/4373/36416997680_c438c968e5_z.jpg"
+            src={store2}
+            style={{ width: "100vw", height: "40vh" }}
+          />
+          <img
+            src={store3}
+            alt="image of root"
+            style={{ width: "100vw", height: "40vh" }}
+          />
+
+
+
+
+
+
+          <img
+            src="https://cdn.tridge.com/attachment-file/31/c7/06/31c70663f7b1bd4eced4a4a100efda382ca64ecc/Cassava-roots.jpg"
+            alt="image of root"
+            style={{ width: "100vw", height: "40vh" }}
+          />
+          <img
+            src="https://media.istockphoto.com/id/507684372/photo/coconut-palm-tree-with-coconuts-on-big-island-in-hawaii.jpg?s=612x612&w=0&k=20&c=LioKxL1KApKrsTtm3pl8Fy5Y0zb6w088E-oMvAhbppA="
             alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
@@ -242,19 +274,18 @@ export default function MainPage() {
           />
 
           <img
-            src="https://i.ytimg.com/vi/SB2eHdaKrAY/maxresdefault.jpg"
+            src={garriImage}
             alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
 
           <img
-            src="https://i0.wp.com/www.myagricworld.com/wp-content/uploads/2021/06/mena.png?fit=1200%2C1025&ssl=1"
+            src="https://www.hubeatz.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fddbkqm2ya%2Fimage%2Fupload%2Fv1705121601%2Flmfqpeyijis6j5s94ca6.jpg&w=3840&q=75"
             alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4hxzb0F-jUzbjliKz82nXe6OYsQm8x3WTCtvJhCWks-BWIUJcT2elG8t0TS7ksxtibE4&usqp=CAU"
-            alt="image of root"
+            src={crayfishImage}
             style={{ width: "100vw", height: "40vh" }}
           />
         </div>
