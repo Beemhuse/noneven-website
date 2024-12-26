@@ -5,12 +5,14 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import emailjs from "emailjs-com"; // Importing EmailJS
 import products from "../../assets/product";
-import crayfishImage from "../../assets/ProductImage/crayfishImage.jpeg"
-import garriImage from "../../assets/ProductImage/garriImage.jpeg"
-import store1 from "../../assets/ProductImage/store1.jpeg"
-import store2 from "../../assets/ProductImage/store2.jpeg"
-import store3 from "../../assets/ProductImage/store3.jpeg"
+import crayfishImage from "../../assets/ProductImage/crayfishImage.jpeg";
+import garriImage from "../../assets/ProductImage/garriImage.jpeg";
+import store1 from "../../assets/ProductImage/store1.jpeg";
+import store2 from "../../assets/ProductImage/store2.jpeg";
+import store3 from "../../assets/ProductImage/store3.jpeg";
 
+import palmfruittree from "../../assets/Image/palmfruittree.jpg";
+import coconuttree from "../../assets/Image/coconuttree.jpg";
 
 export default function MainPage() {
   const [checkoutInfo, setCheckoutInfo] = useState({
@@ -18,17 +20,37 @@ export default function MainPage() {
     email: "",
     phone: "",
     address: "",
+    currencyType: "",
+    currencyValue: 0,
   });
   const [showForm, setShowForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [selectedPrice, setSelectedPrice] = useState(0);
+  const [selectedPriceUSD, setSelectedPriceUSD] = useState(0);
+  const [selectedPriceEUR, setSelectedPriceEUR] = useState(0);
+
+  const handleCurrencyChange = (currency) => {
+    setCheckoutInfo({
+      ...checkoutInfo,
+      currencyType: currency,
+      currencyValue:
+        currency === "NGN"
+          ? selectedPrice
+          : currency === "USD"
+          ? selectedPriceUSD
+          : currency === "EUR"
+          ? selectedPriceEUR
+          : selectedPrice,
+
+    });
+  };
 
   // Flutterwave configuration object
   const flutterwaveConfig = {
     public_key: "FLWPUBK_TEST-3c7d20e63800e36901ea8101a3a53aea-X", // Replace this with your Flutterwave public key
     tx_ref: Date.now(), // Reference to uniquely identify the transaction
-    amount: selectedPrice, // Amount in Naira
-    currency: "NGN", // Currency
+    amount: checkoutInfo?.currencyValue, // Amount in Naira
+    currency: checkoutInfo?.currencyType, // Currency
     payment_options: "card, mobilemoney, ussd",
     customer: {
       email: checkoutInfo.email, // Customer's email address
@@ -44,62 +66,6 @@ export default function MainPage() {
 
   // Function to handle payment
   const handleFlutterwavePayment = useFlutterwave(flutterwaveConfig);
-
-  // Function to send emails using EmailJS
-  // const sendEmails = (buyerEmail, paymentReference) => {
-  //   const emailData = {
-  //     name: checkoutInfo.name,
-  //     email: checkoutInfo.email,
-  //     phone: checkoutInfo.phone,
-  //     address: checkoutInfo.address,
-  //     product: selectedProduct,
-  //     price: selectedPrice,
-  //     payment_reference: paymentReference, // Include the payment reference in the email data
-  //   };
-
-  //   // Sending email to admin
-  //   emailjs
-  //     .send(
-  //       "service_1oupkxg", // Replace with your EmailJS service ID
-  //       "template_gb4qaag", // For admin email
-  //       {
-  //         ...emailData,
-  //         to_email: "noblenegroventures@gmail.com", // Admin's email
-
-  //         subject: "New Purchase Order",
-  //       },
-  //       "uQCYukDaD13qnaIyx" // Replace with your EmailJS public key
-  //     )
-  //     .then(
-  //       (result) => {
-  //         console.log("Admin email sent:", result.text);
-  //       },
-  //       (error) => {
-  //         console.log("Error sending email to admin:", error.text);
-  //       }
-  //     );
-
-  //   // Sending email to buyer (receipt)
-  //   emailjs
-  //     .send(
-  //       "service_1oupkxg", // Replace with your EmailJS service ID
-  //       "template_9q5dkrk", // For buyer email receipt
-  //       {
-  //         ...emailData,
-  //         to_email: buyerEmail, // Buyer's email
-  //         subject: "Your Purchase Receipt",
-  //       },
-  //       "uQCYukDaD13qnaIyx" // Replace with your EmailJS public key
-  //     )
-  //     .then(
-  //       (result) => {
-  //         console.log("Buyer receipt email sent:", result.text);
-  //       },
-  //       (error) => {
-  //         console.log("Error sending receipt to buyer:", error.text);
-  //       }
-  //     );
-  // };
 
   const sendEmails = (buyerEmail, paymentReference) => {
     console.log({ buyerEmail });
@@ -164,7 +130,8 @@ export default function MainPage() {
       checkoutInfo.name &&
       checkoutInfo.email &&
       checkoutInfo.phone &&
-      checkoutInfo.address
+      checkoutInfo.address &&
+      checkoutInfo.currencyValue
     ) {
       handleFlutterwavePayment({
         callback: (response) => {
@@ -190,9 +157,20 @@ export default function MainPage() {
   };
 
   // Function to show the form and set selected product and price
-  const handleCheckout = (product, price) => {
+  const handleCheckout = (product, price, usdPrice, eurPrice) => {
+    setCheckoutInfo({
+      ...checkoutInfo,
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      currencyValue: 0,
+      currencyType: "",
+    });
     setSelectedProduct(product);
     setSelectedPrice(price);
+    setSelectedPriceUSD(usdPrice);
+    setSelectedPriceEUR(eurPrice);
     setShowForm(true); // Show form for delivery info
   };
 
@@ -210,65 +188,27 @@ export default function MainPage() {
 
   return (
     <section className="xl:px-[100px] p-.3 mt-[50px] grid gap-[50px] relative">
-      {/* <img
-        src="https://media.istockphoto.com/id/1178618553/photo/guine-bissau.jpg?s=612x612&w=0&k=20&c=QK_mPsFzjsIaVPR5YNYIovMtJKEnQgzgFyEJTrwdnAQ="
-        alt="image of root"
-        className="w-full"
-        style={{ height: "70vh" }}
-      /> */}
-      <img
-        src={store2}
-        alt="image of root"
-        className="w-full"
-        style={{ height: "70vh", }}
-      />
-      <div className="xl:w-3/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
-        <h2 className="xl:text-3xl text-2xl xl:text-justify text-center font-[600]">
-        Building and Facilitating a Thriving Agricultural-based Supplies for our Global Needs
-        </h2>
-        <p className="xl:text-2xl text-lg text-center">
-          We are dedicated to supporting Nigerian farmers and businesses
-          throughout the agricultural value chain. Our mission is to promote
-          sustainable practices, ensure access to necessary resources, and
-          contribute to food security in the nation.
-        </p>
-      </div>
-      {/* <div className="flex flex-col items-center gap-8">
-        <div className="grid grid-cols-3 items-center gap-3"> */}
       <div className="flex flex-col items-center gap-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
           <img
-            src={store1}
+            src={palmfruittree}
+            alt="image of root"
+            style={{ width: "100vw", height: "40vh" }}
+          />
+          <img src={coconuttree} style={{ width: "100vw", height: "40vh" }} />
+
+          <img
+            src="https://i.ytimg.com/vi/mtA51AezDjE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBm4S4lwaRmSzO64X7VYRrxU6IhuQ"
             alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
           <img
-            src={store2}
-            style={{ width: "100vw", height: "40vh" }}
-          />
-          <img
-            src={store3}
-            alt="image of root"
-            style={{ width: "100vw", height: "40vh" }}
-          />
-
-
-
-
-
-
-          <img
-            src="https://cdn.tridge.com/attachment-file/31/c7/06/31c70663f7b1bd4eced4a4a100efda382ca64ecc/Cassava-roots.jpg"
+            src="https://guardian.ng/wp-content/uploads/2021/06/Fresh-oil-palm-fruits-1062x598.jpg"
             alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
           <img
-            src="https://media.istockphoto.com/id/507684372/photo/coconut-palm-tree-with-coconuts-on-big-island-in-hawaii.jpg?s=612x612&w=0&k=20&c=LioKxL1KApKrsTtm3pl8Fy5Y0zb6w088E-oMvAhbppA="
-            alt="image of root"
-            style={{ width: "100vw", height: "40vh" }}
-          />
-          <img
-            src="https://media.istockphoto.com/id/1178618553/photo/guine-bissau.jpg?s=612x612&w=0&k=20&c=QK_mPsFzjsIaVPR5YNYIovMtJKEnQgzgFyEJTrwdnAQ="
+            src="https://thumbs.dreamstime.com/b/aromatic-young-coconut-tree-farm-tropical-green-fruit-growth-thailand-to-export-asia-world-nature-product-agriculture-346586924.jpg"
             alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
@@ -279,17 +219,43 @@ export default function MainPage() {
             style={{ width: "100vw", height: "40vh" }}
           />
 
+          <img src={crayfishImage} style={{ width: "100vw", height: "40vh" }} />
+        </div>
+      </div>
+      <div className="xl:w-3/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
+        <h2 className="xl:text-3xl text-2xl xl:text-justify text-center font-[600]">
+          Building and Facilitating a Thriving Agricultural-based Supplies for
+          our Global Needs
+        </h2>
+        <p className="xl:text-2xl text-lg text-center">
+          We are dedicated to supporting Nigerian farmers and businesses
+          throughout the agricultural value chain. Our mission is to promote
+          sustainable practices, ensure access to necessary resources, and
+          contribute to food security in the nation.
+        </p>
+      </div>
+      {/* <div className="flex flex-col items-center gap-8">
+        <div className="grid grid-cols-3 items-center gap-3"> */}
+
+      {/* ..... */}
+
+      <div className="flex flex-col items-center gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
           <img
-            src="https://www.hubeatz.com/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fddbkqm2ya%2Fimage%2Fupload%2Fv1705121601%2Flmfqpeyijis6j5s94ca6.jpg&w=3840&q=75"
+            src={store1}
             alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
+          <img src={store2} style={{ width: "100vw", height: "40vh" }} />
           <img
-            src={crayfishImage}
+            src={store3}
+            alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
         </div>
       </div>
+
+      {/* ..... */}
       <div className="xl:w-3/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
         <h2 className="xl:text-3xl text-2xl xl:text-justify text-center font-[600]">
           Unlock Clarity & Confidence in Your Real Estate Journey
@@ -314,6 +280,7 @@ export default function MainPage() {
             style={{ width: "30vw" }}
           />
         </div>
+        <p>Those in diaspora, instead of coming back into unnecessary altercation with mistrusted relative(s); enter into contract with Noble Negro Ventures Nigeria Limited through any lawyer of your choice to purchase a land and or build a house of your specification for you and get your documents with the property on your return to the country.</p>
         <button
           className="flex  border-2 font-bold text-white bg-[#2D89BF] px-3 py-2  items-center gap-3"
           href="mailto:noblenegroventures@gmail.com"
@@ -412,6 +379,19 @@ export default function MainPage() {
                 />
               </div>
               <div className="mb-4">
+                <label className="block mb-1 font-medium">Currency</label>
+                <select
+                  value={checkoutInfo.currencyType}
+                  onChange={(e) => handleCurrencyChange(e.target.value)}
+                  className="border w-full px-3 py-2 rounded-md"
+                >
+                  <option value="">Select</option>
+                  <option value="NGN">Naira (₦)</option>
+                  <option value="USD">Dollar ($)</option>
+                  <option value="EUR">Euro (€)</option>
+                </select>
+              </div>
+              <div className="mb-4">
                 <label className="block mb-1 font-medium">
                   Delivery Address
                 </label>
@@ -461,8 +441,17 @@ export default function MainPage() {
                 {product.name}
               </h3>
               <p className="text-gray-600">₦{product.price}</p>
+              <p className="text-gray-600">${product.priceUSD}</p>
+              <p className="text-gray-600">€{product.priceEUR}</p>
               <button
-                onClick={() => handleCheckout(product.name, product.price)}
+                onClick={() =>
+                  handleCheckout(
+                    product.name,
+                    product.price,
+                    product.priceUSD,
+                    product.priceEUR
+                  )
+                }
                 className="bg-blue-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-blue-600"
               >
                 Buy Now
@@ -474,3 +463,4 @@ export default function MainPage() {
     </section>
   );
 }
+//

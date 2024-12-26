@@ -18,17 +18,37 @@ export default function Services() {
     email: "",
     phone: "",
     address: "",
+    currencyType: "",
+    currencyValue: 0,
   });
   const [showForm, setShowForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [selectedPrice, setSelectedPrice] = useState(0);
+  const [selectedPriceUSD, setSelectedPriceUSD] = useState(0);
+  const [selectedPriceEUR, setSelectedPriceEUR] = useState(0);
+
+  const handleCurrencyChange = (currency) => {
+    setCheckoutInfo({
+      ...checkoutInfo,
+      currencyType: currency,
+      currencyValue:
+        currency === "NGN"
+          ? selectedPrice
+          : currency === "USD"
+          ? selectedPriceUSD
+          : currency === "EUR"
+          ? selectedPriceEUR
+          : selectedPrice,
+
+    });
+  };
 
   // Flutterwave configuration object
   const flutterwaveConfig = {
     public_key: "FLWPUBK_TEST-3c7d20e63800e36901ea8101a3a53aea-X", // Replace this with your Flutterwave public key
     tx_ref: Date.now(), // Reference to uniquely identify the transaction
-    amount: selectedPrice, // Amount in Naira
-    currency: "NGN", // Currency
+    amount: checkoutInfo?.currencyValue, // Amount in Naira
+    currency: checkoutInfo?.currencyType, // Currency
     payment_options: "card, mobilemoney, ussd",
     customer: {
       email: checkoutInfo.email, // Customer's email address
@@ -106,7 +126,8 @@ export default function Services() {
       checkoutInfo.name &&
       checkoutInfo.email &&
       checkoutInfo.phone &&
-      checkoutInfo.address
+      checkoutInfo.address &&
+      checkoutInfo.currencyValue
     ) {
       handleFlutterwavePayment({
         callback: (response) => {
@@ -131,10 +152,21 @@ export default function Services() {
     }
   };
 
-  // Function to show the form and set selected product and price
-  const handleCheckout = (product, price) => {
+ // Function to show the form and set selected product and price
+  const handleCheckout = (product, price, usdPrice, eurPrice) => {
+    setCheckoutInfo({
+      ...checkoutInfo,
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      currencyValue: 0,
+      currencyType: "",
+    });
     setSelectedProduct(product);
     setSelectedPrice(price);
+    setSelectedPriceUSD(usdPrice);
+    setSelectedPriceEUR(eurPrice);
     setShowForm(true); // Show form for delivery info
   };
 
@@ -163,120 +195,136 @@ export default function Services() {
           </p>
         </div>
         <div className="flex flex-col items-center gap-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
-            {products.map((product) => (
-              <div key={product.id} className="text-center">
-                <img
-                  src={product.image}
-                  alt={product.alt}
-                  style={{ height: "60vh", width: "100%" }}
-                  className="w-full"
-                />
-                <h3
-                  className="font-bold text-lg mt-2"
-                  style={{ textTransform: "uppercase" }}
-                >
-                  {product.name}
-                </h3>
-                <p className="text-gray-600">₦{product.price}</p>
-                <button
-                  onClick={() => handleCheckout(product.name, product.price)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-blue-600"
-                >
-                  Buy Now
-                </button>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
+          {products.map((product) => (
+            <div key={product.id} className="text-center">
+              <img
+                src={product.image}
+                alt={product.alt}
+                style={{ height: "60vh", width: "100%" }}
+                className="w-full"
+              />
+              <h3
+                className="font-bold text-lg mt-2"
+                style={{ textTransform: "uppercase" }}
+              >
+                {product.name}
+              </h3>
+              <p className="text-gray-600">₦{product.price}</p>
+              <p className="text-gray-600">${product.priceUSD}</p>
+              <p className="text-gray-600">€{product.priceEUR}</p>
+              <button
+                onClick={() =>
+                  handleCheckout(
+                    product.name,
+                    product.price,
+                    product.priceUSD,
+                    product.priceEUR
+                  )
+                }
+                className="bg-blue-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-blue-600"
+              >
+                Buy Now
+              </button>
+            </div>
+          ))}
           </div>
         </div>
 
         {/* Form for checkout info */}
         {showForm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg relative">
-              {/* Close button */}
-              <button
-                onClick={closeForm}
-                className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
-              >
-                <IoClose size={24} />
-              </button>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg relative">
+            {/* Close button */}
+            <button
+              onClick={closeForm}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+            >
+              <IoClose size={24} />
+            </button>
 
-              <h2 className="text-lg font-bold mb-4 text-center">
-                Enter Delivery Information
-              </h2>
-              <form onSubmit={handleFormSubmit}>
-                <div className="mb-4">
-                  <label className="block mb-1 font-medium">Name</label>
-                  <input
-                    type="text"
-                    value={checkoutInfo.name}
-                    onChange={(e) =>
-                      setCheckoutInfo({ ...checkoutInfo, name: e.target.value })
-                    }
-                    required
-                    className="border w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block mb-1 font-medium">Email</label>
-                  <input
-                    type="email"
-                    value={checkoutInfo.email}
-                    onChange={(e) =>
-                      setCheckoutInfo({
-                        ...checkoutInfo,
-                        email: e.target.value,
-                      })
-                    }
-                    required
-                    className="border w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block mb-1 font-medium">Phone</label>
-                  <input
-                    type="text"
-                    value={checkoutInfo.phone}
-                    onChange={(e) =>
-                      setCheckoutInfo({
-                        ...checkoutInfo,
-                        phone: e.target.value,
-                      })
-                    }
-                    required
-                    className="border w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block mb-1 font-medium">
-                    Delivery Address
-                  </label>
-                  <input
-                    type="text"
-                    value={checkoutInfo.address}
-                    onChange={(e) =>
-                      setCheckoutInfo({
-                        ...checkoutInfo,
-                        address: e.target.value,
-                      })
-                    }
-                    required
-                    className="border w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md w-full font-semibold"
-                  >
-                    Proceed to Payment
-                  </button>
-                </div>
-              </form>
-            </div>
+            <h2 className="text-lg font-bold mb-4 text-center">
+              Enter Delivery Information
+            </h2>
+            <form onSubmit={handleFormSubmit}>
+              <div className="mb-4">
+                <label className="block mb-1 font-medium">Name</label>
+                <input
+                  type="text"
+                  value={checkoutInfo.name}
+                  onChange={(e) =>
+                    setCheckoutInfo({ ...checkoutInfo, name: e.target.value })
+                  }
+                  required
+                  className="border w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1 font-medium">Email</label>
+                <input
+                  type="email"
+                  value={checkoutInfo.email}
+                  onChange={(e) =>
+                    setCheckoutInfo({ ...checkoutInfo, email: e.target.value })
+                  }
+                  required
+                  className="border w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1 font-medium">Phone</label>
+                <input
+                  type="text"
+                  value={checkoutInfo.phone}
+                  onChange={(e) =>
+                    setCheckoutInfo({ ...checkoutInfo, phone: e.target.value })
+                  }
+                  required
+                  className="border w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1 font-medium">Currency</label>
+                <select
+                  value={checkoutInfo.currencyType}
+                  onChange={(e) => handleCurrencyChange(e.target.value)}
+                  className="border w-full px-3 py-2 rounded-md"
+                >
+                  <option value="">Select</option>
+                  <option value="NGN">Naira (₦)</option>
+                  <option value="USD">Dollar ($)</option>
+                  <option value="EUR">Euro (€)</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label className="block mb-1 font-medium">
+                  Delivery Address
+                </label>
+                <input
+                  type="text"
+                  value={checkoutInfo.address}
+                  onChange={(e) =>
+                    setCheckoutInfo({
+                      ...checkoutInfo,
+                      address: e.target.value,
+                    })
+                  }
+                  required
+                  className="border w-full px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md w-full font-semibold"
+                >
+                  Proceed to Payment
+                </button>
+              </div>
+            </form>
           </div>
-        )}
+        </div>
+      )}
 
         <div className="w-full m-auto  gap-4 flex mt-10 flex-col items-center justify-center">
           <h2 className="xl:text-3xl text-2xl text-center font-[600]">
@@ -307,7 +355,10 @@ export default function Services() {
               style={{ width: "30vw" }}
             />
           </div>
-          <button className="flex  border-2 font-bold text-white bg-[#2D89BF] px-3 py-2  items-center gap-3" href="mailto:noblenegroventures@gmail.com">
+          <button
+            className="flex  border-2 font-bold text-white bg-[#2D89BF] px-3 py-2  items-center gap-3"
+            href="mailto:noblenegroventures@gmail.com"
+          >
             <IoMdCall /> Book a consultation call{" "}
           </button>
         </div>
