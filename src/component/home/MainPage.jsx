@@ -11,7 +11,8 @@ import store1 from "../../assets/ProductImage/headoffice.jpeg";
 import store2 from "../../assets/ProductImage/store2.jpeg";
 import store3 from "../../assets/ProductImage/store3.jpeg";
 import coconutimage from "../../assets/ProductImage/coconutimage.jpeg";
-
+import ElevenLitersRedPalmOil from "../../assets/ProductImage/11 Liters Red Palm oil.jpeg";
+import MlFortifiedCoconutoil from "../../assets/ProductImage/500 ml Fortified Coconut oil (Edible).jpeg"; // 500 ml Fortified Coconut oil (Edible)
 import palmfruittree from "../../assets/Image/palmfruittree.jpg";
 import coconuttree from "../../assets/Image/coconuttree.jpg";
 
@@ -203,7 +204,7 @@ export default function MainPage() {
                 style={{ width: "49%", height: "15rem" }}
               />
               <img
-                src="https://travel2unlimited.com/wp-content/uploads/2016/03/9-29.jpg"
+                src={ElevenLitersRedPalmOil}
                 alt="Small image 1"
                 style={{ width: "49%", height: "15rem" }}
               />
@@ -218,7 +219,7 @@ export default function MainPage() {
                 style={{ width: "49%", height: "15rem" }}
               />
               <img
-                src="https://thumbs.dreamstime.com/b/coconuts-sack-12748924.jpg"
+                src={MlFortifiedCoconutoil}
                 alt="Small image 1"
                 style={{ width: "49%", height: "15rem" }}
               />
