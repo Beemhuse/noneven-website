@@ -10,6 +10,7 @@ import garriImage from "../../assets/ProductImage/garriImage.jpeg";
 import store1 from "../../assets/ProductImage/headoffice.jpeg";
 import store2 from "../../assets/ProductImage/store2.jpeg";
 import store3 from "../../assets/ProductImage/store3.jpeg";
+import coconutimage from "../../assets/ProductImage/coconutimage.jpeg";
 
 import palmfruittree from "../../assets/Image/palmfruittree.jpg";
 import coconuttree from "../../assets/Image/coconuttree.jpg";
@@ -212,7 +213,7 @@ export default function MainPage() {
             <img src={coconuttree} style={{ width: "100vw", height: "40vh" }} />
             <div className="flex flex-row items-center gap-3 mt-4">
               <img
-                src="https://static.vecteezy.com/system/resources/previews/008/367/412/non_2x/a-heap-of-ripe-coconuts-stacked-together-free-photo.jpg"
+                src={coconutimage}
                 alt="Small image 1"
                 style={{ width: "49%", height: "15rem" }}
               />
