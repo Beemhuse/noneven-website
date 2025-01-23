@@ -7,7 +7,7 @@ import emailjs from "emailjs-com"; // Importing EmailJS
 import products from "../../assets/product";
 import crayfishImage from "../../assets/ProductImage/crayfishImage.jpeg";
 import garriImage from "../../assets/ProductImage/garriImage.jpeg";
-import store1 from "../../assets/ProductImage/store1.jpeg";
+import store1 from "../../assets/ProductImage/headoffice.jpeg";
 import store2 from "../../assets/ProductImage/store2.jpeg";
 import store3 from "../../assets/ProductImage/store3.jpeg";
 
@@ -41,7 +41,6 @@ export default function MainPage() {
           : currency === "EUR"
           ? selectedPriceEUR
           : selectedPrice,
-
     });
   };
 
@@ -190,6 +189,80 @@ export default function MainPage() {
     <section className="xl:px-[100px] p-.3 mt-[50px] grid gap-[50px] relative">
       <div className="flex flex-col items-center gap-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
+          <div>
+            <img
+              src={palmfruittree}
+              alt="image of root"
+              style={{ width: "100vw", height: "40vh" }}
+            />
+            <div className="flex flex-row items-center gap-3 mt-4">
+              <img
+                src="https://guardian.ng/wp-content/uploads/2021/06/Fresh-oil-palm-fruits-1062x598.jpg"
+                alt="Small image 1"
+                style={{ width: "49%", height: "15rem" }}
+              />
+              <img
+                src="https://travel2unlimited.com/wp-content/uploads/2016/03/9-29.jpg"
+                alt="Small image 1"
+                style={{ width: "49%", height: "15rem" }}
+              />
+            </div>
+          </div>
+          <div>
+            <img src={coconuttree} style={{ width: "100vw", height: "40vh" }} />
+            <div className="flex flex-row items-center gap-3 mt-4">
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/008/367/412/non_2x/a-heap-of-ripe-coconuts-stacked-together-free-photo.jpg"
+                alt="Small image 1"
+                style={{ width: "49%", height: "15rem" }}
+              />
+              <img
+                src="https://thumbs.dreamstime.com/b/coconuts-sack-12748924.jpg"
+                alt="Small image 1"
+                style={{ width: "49%", height: "15rem" }}
+              />
+            </div>
+          </div>
+          <div>
+            <img
+              src="https://i.ytimg.com/vi/mtA51AezDjE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBm4S4lwaRmSzO64X7VYRrxU6IhuQ"
+              alt="image of root"
+              style={{ width: "100vw", height: "40vh" }}
+            />
+            <div className="flex flex-row items-center gap-3 mt-4">
+              <img
+                src={garriImage}
+                alt="Small image 1"
+                style={{ width: "49%", height: "15rem" }}
+              />
+              <img
+                src="https://dailytrust.com/wp-content/uploads/2020/04/High-demand-for-garri-as-prices-of-food-items-skyrocket.jpg"
+                alt="Small image 1"
+                style={{ width: "49%", height: "15rem" }}
+              />
+            </div>
+          </div>
+          <div>
+            <img
+              src={crayfishImage}
+              style={{ width: "100vw", height: "40vh" }}
+            />
+            <div className="flex flex-row items-center gap-3 mt-4">
+              <img
+                src="https://danazamsglobalventures.com/wp-content/uploads/2022/10/dried-crayfish-packaged.jpg"
+                alt="Small image 1"
+                style={{ width: "49%", height: "15rem" }}
+              />
+              <img
+                src="https://udyfoods.com/wp-content/uploads/2021/10/IMG_99271-scaled.jpeg"
+                alt="Small image 1"
+                style={{ width: "49%", height: "15rem" }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-6 mb-9 p-2">
           <img
             src={palmfruittree}
             alt="image of root"
@@ -208,7 +281,7 @@ export default function MainPage() {
             style={{ width: "100vw", height: "40vh" }}
           />
           <img
-            src="https://thumbs.dreamstime.com/b/aromatic-young-coconut-tree-farm-tropical-green-fruit-growth-thailand-to-export-asia-world-nature-product-agriculture-346586924.jpg"
+            src="https://thumbs.dreamstime.com/b/aromatic-young-coconut-tree-farm-tropical-green-fruit-growth-thailand-to-export-asia-world-nature-product-agriculture-349586924.jpg"
             alt="image of root"
             style={{ width: "100vw", height: "40vh" }}
           />
@@ -220,7 +293,7 @@ export default function MainPage() {
           />
 
           <img src={crayfishImage} style={{ width: "100vw", height: "40vh" }} />
-        </div>
+        </div> */}
       </div>
       <div className="xl:w-3/4 w-full m-auto gap-4 flex flex-col items-center justify-center">
         <h2 className="xl:text-3xl text-2xl xl:text-justify text-center font-[600]">
@@ -280,7 +353,13 @@ export default function MainPage() {
             style={{ width: "30vw" }}
           />
         </div>
-        <p>Those in diaspora, instead of coming back into unnecessary altercation with mistrusted relative(s); enter into contract with Noble Negro Ventures Nigeria Limited through any lawyer of your choice to purchase a land and or build a house of your specification for you and get your documents with the property on your return to the country.</p>
+        <p>
+          Those in diaspora, instead of coming back into unnecessary altercation
+          with mistrusted relative(s); enter into contract with Noble Negro
+          Ventures Nigeria Limited through any lawyer of your choice to purchase
+          a land and or build a house of your specification for you and get your
+          documents with the property on your return to the country.
+        </p>
         <button
           className="flex  border-2 font-bold text-white bg-[#2D89BF] px-3 py-2  items-center gap-3"
           href="mailto:noblenegroventures@gmail.com"
