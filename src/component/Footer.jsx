@@ -25,20 +25,21 @@ const Footer = () => {
             {/* NONEVEN Section */}
 
             {/* Products Section */}
+            
             <div>
               <h4 className="font-semibold mb-4">Products</h4>
               <ul>
                 <li className="mb-2">
+                  <a href="#">Palm Oil</a>
+                </li>
+                <li className="mb-2">
+                  <a href="#">Coconut</a>
+                </li>
+                <li className="mb-2">
+                  <a href="#">Packaged Crayfish </a>
+                </li>
+                <li className="mb-2">
                   <a href="#">Books</a>
-                </li>
-                <li className="mb-2">
-                  <a href="#">Fertilizers</a>
-                </li>
-                <li className="mb-2">
-                  <a href="#">Livestock Feed</a>
-                </li>
-                <li className="mb-2">
-                  <a href="#">Agro Chemicals</a>
                 </li>
               </ul>
             </div>
@@ -50,13 +51,11 @@ const Footer = () => {
                 <li className="mb-2">
                   <strong>Head Office</strong>
                   <br />
-                  372 Abak-Ikauraban Road, Nkoe Ebom Etoi, Ukauran L.G.A, Akwa
-                  Ibom State, Nigeria.
+                  372A  Abak-Ukanafun Road, Nkek Enen Ido, Ukanafun LGA, Akwa Ibom State, Nigeria.
                 </li>
                 <li className="mb-2">
                   <strong>Branch Office</strong>
-                  <br />5 Udok Office Close, Behind Mechanic Village, Uyo, Akwa
-                  Ibom State, Nigeria.
+                  <br />5 Udo Usoro Close, Behind Mechanic Village, Uyo, Akwa Ibom State, Nigeria.
                 </li>
               </ul>
             </div>
