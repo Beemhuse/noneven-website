@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex  flex-col md:flex-row justify-between">
           {/* Left Section - Logo and Registration Info */}
-          <div className="mb-8 w-[50%] md:mb-0 flex flex-col items-center md:items-start">
+          <div className="mb-8 w-[100%] md:mb-0 flex flex-col items-center md:items-start">
             <p className="text-sm font-semibold">Proudly Registered</p>
 
             <img
