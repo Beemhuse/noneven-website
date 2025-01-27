@@ -3,15 +3,14 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 import { IoMdMail, IoMdCall } from "react-icons/io";
 import { AiFillInstagram } from "react-icons/ai";
 
-
 const Footer = () => {
   return (
     <footer className="bg-gray-100 text-gray-700 py-8">
       <div className="container mx-auto px-4">
         <div className="flex  flex-col md:flex-row justify-between">
           {/* Left Section - Logo and Registration Info */}
-          <div className="mb-8 w-[100%] md:mb-0 flex flex-col items-center md:items-start">
-          <p className="text-sm font-semibold">Proudly Registered</p>
+          <div className="mb-8 w-[50%] md:mb-0 flex flex-col items-center md:items-start">
+            <p className="text-sm font-semibold">Proudly Registered</p>
 
             <img
               src="/corporate.svg" // Replace with the path to the logo
@@ -25,7 +24,7 @@ const Footer = () => {
             {/* NONEVEN Section */}
 
             {/* Products Section */}
-            
+
             <div>
               <h4 className="font-semibold mb-4">Products</h4>
               <ul>
@@ -51,11 +50,13 @@ const Footer = () => {
                 <li className="mb-2">
                   <strong>Head Office</strong>
                   <br />
-                  372A  Abak-Ukanafun Road, Nkek Enen Ido, Ukanafun LGA, Akwa Ibom State, Nigeria.
+                  372A Abak-Ukanafun Road, Nkek Enen Ido, Ukanafun LGA, Akwa
+                  Ibom State, Nigeria.
                 </li>
                 <li className="mb-2">
                   <strong>Branch Office</strong>
-                  <br />5 Udo Usoro Close, Behind Mechanic Village, Uyo, Akwa Ibom State, Nigeria.
+                  <br />5 Udo Usoro Close, Behind Mechanic Village, Uyo, Akwa
+                  Ibom State, Nigeria.
                 </li>
               </ul>
             </div>
@@ -134,13 +135,12 @@ const Footer = () => {
             <a href="#">Privacy Policy</a>
           </div>
           <div className="flex text-2xl items-center gap-6">
-<FaLinkedin />
-<FaSquareXTwitter />
-<FaFacebookSquare />
-<IoMdMail />
-<IoMdCall />
-<AiFillInstagram />
-
+            <FaLinkedin />
+            <FaSquareXTwitter />
+            <FaFacebookSquare />
+            <IoMdMail />
+            <IoMdCall />
+            <AiFillInstagram />
           </div>
         </div>
       </div>
