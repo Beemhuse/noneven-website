@@ -3,7 +3,7 @@ const AboutBanner = () => {
     minHeight: window.innerWidth >= 768 ? "45rem" : "120rem",
   };
   const heightForImageCard = {
-    minHeight: window.innerWidth >= 768 ? "45rem" : "100rem",
+    minHeight: window.innerWidth >= 768 ? "45rem" : "105rem",
     backgroundImage: "url('/successbg.svg')",
     backgroundSize: "cover",
 
