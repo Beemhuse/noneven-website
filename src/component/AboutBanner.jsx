@@ -13,7 +13,7 @@ const AboutBanner = () => {
   return (
     <section
       // className="bg-[#2D89BF] py-16  px-10 xl:px-[100px]"
-      className="relative h-80 bg-cover bg-center"
+      className="relative bg-cover bg-center"
       style={heightForImageCard}
     >
       <div

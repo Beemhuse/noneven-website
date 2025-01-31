@@ -18,7 +18,8 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center py-4 px-20 bg-white ">
-      <img src="/Logo.svg" alt="noneven logo" />
+      <a href="/"> <img src="/Logo.svg" alt="noneven logo" /></a>
+     
       {/* Desktop Menu */}
       <ul className="hidden md:flex w-fit m-auto space-x-6">
         {navItems.map((item) => (
